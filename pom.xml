@@ -29,7 +29,7 @@
   <name>${project.groupId}:${project.artifactId}</name>
   <packaging>pom</packaging>
 
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.1-SNAPSHOT</version>
 
   <repositories>
     <repository>
@@ -145,14 +145,14 @@
         <groupId>org.sonatype.nexus.examples</groupId>
         <artifactId>url-realm-nexus-plugin</artifactId>
         <type>nexus-plugin</type>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.1-SNAPSHOT</version>
       </dependency>
 
       <dependency>
         <groupId>org.sonatype.nexus.examples</groupId>
         <artifactId>url-realm-nexus-plugin</artifactId>
         <type>jar</type>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.1-SNAPSHOT</version>
       </dependency>
 
     </dependencies>
@@ -167,6 +167,79 @@
         <groupId>org.sonatype.nexus</groupId>
         <artifactId>nexus-plugin-bundle-maven-plugin</artifactId>
         <extensions>true</extensions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>1.3.1</version>
+        <executions>
+          <execution>
+            <id>enforce-environment</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <fail>true</fail>
+              <rules>
+                <requireMavenVersion>
+                  <version>[3.0.4,3.1)</version>
+                </requireMavenVersion>
+                <requireJavaVersion>
+                  <version>[1.7,)</version>
+                </requireJavaVersion>
+              </rules>
+            </configuration>
+          </execution>
+          <execution>
+            <id>enforce-dependencies</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <fail>true</fail>
+              <rules>
+                <bannedDependencies>
+                  <searchTransitive>true</searchTransitive>
+                  <excludes>
+                    <exclude>velocity:velocity</exclude>
+                    <exclude>velocity:velocity-dep</exclude>
+                    <exclude>org.sonatype.sisu:sisu-velocity</exclude>
+                    <exclude>commons-logging:*</exclude>
+                    <exclude>commons-vfs:commons-vfs</exclude>
+                    <exclude>commons-beanutils:commons-beanutils</exclude>
+                    <exclude>xmlrpc:*</exclude>
+                    <exclude>*:plexus-container-default</exclude>
+                    <exclude>*:plexus-component-api</exclude>
+                    <exclude>*:jsecurity</exclude>
+                    <exclude>org.sonatype.aether:*:1.8</exclude>
+                    <exclude>*:activation</exclude>
+                    <exclude>*:stax-api</exclude>
+                    <exclude>*:jaxb-api</exclude>
+                    <exclude>*:xml-apis</exclude>
+                    <exclude>junit:junit:(,4.10]</exclude>
+                    <exclude>junit:junit-dep</exclude>
+                    <exclude>javax.servlet:servlet-api</exclude>
+                    <exclude>org.mortbay.jetty:servlet-api</exclude>
+                    <exclude>org.mortbay.jetty:servlet-api-2.5</exclude>
+                    <exclude>org.mockito:mockito-all</exclude>
+                    <exclude>org.hamcrest:*</exclude>
+                    <exclude>org.hamcrest:hamcrest-all:*</exclude>
+                    <exclude>org.sonatype.spice:plexus-ehcache</exclude>
+                    <exclude>org.sonatype.sisu.litmus:litmus-testsupport:(,1.3]</exclude>
+                    <exclude>log4j:*</exclude>
+                    <exclude>org.bouncycastle:*-jdk14:*</exclude>
+                    <exclude>org.bouncycastle:*-jdk15:*</exclude>
+                    <exclude>bouncycastle:*-jdk14:*</exclude>
+                    <exclude>bouncycastle:*-jdk15:*</exclude>
+                  </excludes>
+                  <includes>
+                    <include>org.sonatype.aether:*:1.8.1</include>
+                    <include>org.hamcrest:*:1.3</include>
+                  </includes>
+                </bannedDependencies>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

@@ -21,7 +21,7 @@
   <parent>
     <groupId>org.sonatype.nexus.examples</groupId>
     <artifactId>nexus-examples</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
   </parent>
 
   <artifactId>crawling-nexus-plugin</artifactId>

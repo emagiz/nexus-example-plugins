@@ -80,6 +80,7 @@ public class UrlRealm
     setName(NAME);
     setAuthenticationCachingEnabled(true);
     setAuthorizationCachingEnabled(true);
+    setCredentialsMatcher(new EmagizNormalizingCredentialsMatcher());
   }
 
   @Override
